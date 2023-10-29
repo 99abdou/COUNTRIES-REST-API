@@ -19,10 +19,6 @@ toggle.addEventListener('click', () => {
     // dropDownOne.classList('dark-mode')
 })
 
-// dropDown.addEventListener('click',() => {
-//     dropOption.classList.toggle('drop')
-// })
-
 const coutryAPI = () => {
 fetch("https://restcountries.com/v3.1/all")
 .then(response => response.json())
@@ -52,7 +48,9 @@ let getCountry = (country) => {
     `
 }
 
-iconSearch.addEventListener('click', () => {
+
+
+inputSearch.addEventListener('input', () => {
     if (inputSearch.value === ''){
         alert('Veuillez saisir un pays pour continuer la recherche')
     } else {
@@ -62,22 +60,35 @@ iconSearch.addEventListener('click', () => {
     }
 })
 
-// afficher les pays en ce référant des region sur Api 
-// const countryByRegions = regions => {
-//     selecte.addEventListener('click', => () {
-//         fetch(`https://restcountries.com/v3.1/regionalbloc/${selecte.value}`)
-//         .then(res => res.json())
-//         .then(data => affichagePays(data))
-       
-//         fetch(`https://restcountries.com/v3.1/regionalbloc/${regions}`)
-//         .then(response => response.json())
-//         .then(data => affichagePays(data))
-//         }
-
-//     })
-
 selecte.addEventListener('click', () => {
     fetch(`https://restcountries.com/v3.1/region/${selecte.value}`)
     .then(response => response.json())
     .then(data => affichagePays(data))
 })
+
+// Cliquez sur un pays pour voir des informations plus détaillées sur une page séparée
+
+// Cliquez sur un pays pour voir des informations plus détaillées sur une page séparée, Cliquez sur les pays frontaliers sur la page de détail
+const modal = document.getElementById('countries');  // Get the modal element
+let btnContainer = document.getElementsById('black');
+container.addEventListener('country', () =>{
+
+    for (var i=0;i<btnContainer.length;i++) {
+        btnContainer[i].onclick = function(){
+            modal.style.display = "block";   // Show the modal when clicked on button
+            }
+            }
+})
+
+            closeButton.onclick = openDetailsPage;
+
+            container.addEventListener('country', () => {
+                if (container.value === ''){
+                    alert('Veuillez saisir un pays pour continuer la recherche')
+                } else {
+                    fetch(`https://restcountries.com/v3.1/name/${container.value}`)
+                    .then(res => res.json())
+                    .then(data => affichagePays(data))
+                }
+            })
+
